@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'">
+  <title>URL Aliases</title>
+  <link rel="stylesheet" href="tailwind.css">
+  <script src="fuse.min.js"></script>
+</head>
+<body class="bg-base-100 w-[640px] min-h-[520px] max-h-[640px] p-4 overflow-y-auto relative">
+  <div class="flex justify-between items-center">
+    <div class="flex gap-2">
+      <img src="icons/icon48.png" alt="URL Aliases Icon" class="w-[32px] h-[32px]">
+      <div class="flex flex-col">
+        <h1 class="text-md font-bold text-slate-300">URL Aliases</h1>
+        <span id="version"></span>
+      </div>
+    </div>
+    <div class="flex gap-2">
+      <button id="helpBtn" class="btn btn-xs btn-soft btn-outline">Help</button>
+      <button id="exportBtn" class="btn btn-xs btn-soft  btn-outline">Export</button>
+      <button id="importBtn" class="btn btn-xs btn-soft btn-outline">Import</button>
+      <button id="resetBtn" class="btn btn-xs btn-soft btn-outline btn-warning !hidden">Reset Examples</button>
+    </div>
+  </div>
+
+  <table id="aliasesTable" class="table table-fixed table-xs">
+    <thead>
+      <tr class="!border-0">
+        <th class="w-[110px] pt-2">Add new alias</th>
+        <th class="pt-2"></th>
+        <th class="w-[110px] pt-2"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <form id="createForm" class="create-form">
+      <tr>
+        <td>
+          <input type="text" id="aliasInput" class="input input-xs" placeholder="Enter alias" required>
+          <div id="aliasError" class="error-message">Alias already exists</div>
+        </td>
+        <td>
+          <input type="text" id="urlInput" class="input input-xs w-full" placeholder="Enter URL" required>
+          <input type="text" id="searchParamsInput" class="input input-xs w-full mt-1" placeholder="Search params (optional): /search?q=[SEARCH]">
+          <div class="text-xs opacity-70 pt-1">Add [SEARCH] placeholder where the search term should go</div>
+        </td>
+        <td class="flex gap-1 whitespace-nowrap justify-end">
+          <button type="button" id="clearBtn" class="btn btn-xs btn-soft btn-outline">Clear</button>
+          <button type="submit" id="saveBtn" class="btn btn-xs btn-outline btn-accent">Save</button>
+        </td>
+      </tr>
+    </form>
+    </tbody>
+    <thead>
+      <tr>
+        <th class="pt-3">Alias</th>
+        <th class="pt-3 flex flex-grow space-between items-center">
+          <div class="relative flex-grow">
+            <input type="text" id="filterInput" class="input input-xs w-full" placeholder="Filter aliases...">
+            <button id="clearFilterBtn" class="absolute right-2 top-1/2 -translate-y-1/2 opacity-60 hover:opacity-100 hidden">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+        </th>
+        <th class="pt-3"></th>
+      </tr>
+    </thead>
+    <tbody id="aliasList">
+      <!-- Aliases will be filled here dynamically -->
+    </tbody>
+  </table>
+
+  <dialog id="deleteConfirmDialog">
+    <div class="dialog-container">
+      <h3>Confirm deletion</h3>
+      <p>Are you sure you want to delete the alias?<span id="deleteAliasName"></span>"?</p>
+      <div class="dialog-actions">
+        <button id="cancelDelete" class="btn btn-xs btn-soft btn-outline">Cancel</button>
+        <button id="confirmDelete" class="btn btn-xs btn-outline btn-error">Delete</button>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog id="helpDialog">
+    <div class="dialog-container">
+      <h3>Help & Instructions</h3>
+      <div class="help-content">
+        <p class="text-md font-bold mb-2">How to use aliases</p>
+        <ol class="list-decimal pl-4 space-y-1">
+          <li>Type <code>go</code> in the browser's address bar and press space or Tab.</li>
+          <li>Type the alias name (e.g.: <code>g</code> for Google)</li>
+          <li>Press Enter to navigate to the assigned URL.</li>
+        </ol>
+
+        <p class="text-md font-bold mt-4 mb-2">Search functionality</p>
+        <ol class="list-decimal pl-4 space-y-1">
+          <li>For aliases with search parameters configured:</li>
+          <li>Type <code>go</code> followed by the alias and your search terms.</li>
+          <li>Example: <code>go g Claude AI</code> would search for "Claude AI" on Google.</li>
+        </ol>
+
+        <p class="text-md font-bold mt-4 mb-2">Example aliases</p>
+        <ul class="list-disc pl-4 space-y-1">
+          <li><code>g</code> - Google (supports search)</li>
+          <li><code>yt</code> - YouTube (supports search)</li>
+          <li><code>wiki</code> - Wikipedia (supports search)</li>
+        </ul>
+        <p class="mt-2">You can edit or delete these examples and add your own aliases.</p>
+
+        <div class="dialog-actions mt-4">
+          <button id="closeHelp" class="btn btn-xs btn-outline btn-primary">Close</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <script src="popup.js"></script>
+</body>
+</html>
