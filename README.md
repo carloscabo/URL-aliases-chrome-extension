@@ -25,6 +25,13 @@ The application's popup offers simple management of aliases and URLs:
 - Import aliases (from previously exported JSON)
 - Filter aliases to quickly find what you need
 
+## Privacy
+
+- All data is stored locally in your browser.
+- No personal information is collected.
+- No data is sent to external servers.
+- No analytics or tracking services are used.
+
 ## Installation
 
 1. Download the source code
