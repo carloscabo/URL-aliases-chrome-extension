@@ -3,6 +3,8 @@ Description
 
 URL Aliases is a Chrome extension that simplifies web navigation by allowing users to create and use short, memorable aliases instead of typing long URLs. By typing "go" followed by an alias in the address bar, users can quickly access their favorite websites and even perform direct searches on those sites, saving time and improving productivity.
 
+![Snapshott](snapshot/URL-aliases-640x400.png)
+
 ## How to use aliases
 
 To use an alias:
