@@ -7,8 +7,8 @@ URL Aliases is an extension that allows you to create aliases for URLs so that i
 
 To use an alias:
 
-1. Type **go** in the browser's address bar and press space or Tab.
-2. Type the alias name (e.g., **amz**)
+1. Type `**go**` in the browser's address bar and press space or Tab.
+2. Type the alias name (e.g., `**amz**`)
 3. Press Enter to go to the assigned URL.
 
 For example, if we define `amz` as an alias for `https://amazon.es`, you would type `go` + space + `amz` in the browser's address bar and press Enter.
